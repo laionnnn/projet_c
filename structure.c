@@ -47,3 +47,7 @@ struct user_data {
 };
 
 typedef struct user_data User_Data;
+
+void main(){
+    
+}
