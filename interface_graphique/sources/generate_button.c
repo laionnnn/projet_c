@@ -15,6 +15,7 @@ void on_generate_button_clicked(GtkButton *button, GtkBox *box) {
     GtkWidget *new_button = gtk_button_new_with_label(label_text);
 
     
+    
     g_signal_connect(new_button, "clicked", G_CALLBACK(open_new_window), GINT_TO_POINTER(count));
 
     gtk_box_append(GTK_BOX(box), new_button);

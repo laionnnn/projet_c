@@ -8,3 +8,4 @@ void on_stats_button_clicked(GtkWidget *button, GtkStack *stack) {
 void on_back_button_clicked(GtkWidget *button, GtkStack *stack) {
     gtk_stack_set_visible_child_name(stack, "main");
 }
+
