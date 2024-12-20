@@ -4,6 +4,6 @@
 #include <gtk/gtk.h>
 
 // Function that generate buttons when you click on it
-void on_generate_button_clicked(GtkButton *button, GtkBox *box);
+void on_generate_button_clicked(GtkButton *button, GtkFlowBox *flow_box);
 
 #endif // GENERATE_BUTTON_H

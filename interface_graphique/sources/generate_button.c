@@ -2,8 +2,12 @@
 #include "add_window.h"
 #include "generate_button.h"
 
+#include <gtk/gtk.h>
+#include "add_window.h"
+#include "generate_button.h"
+
 // Function that generate new button when you click on a button
-void on_generate_button_clicked(GtkButton *button, GtkBox *box) {
+void on_generate_button_clicked(GtkButton *button, GtkFlowBox *flow_box) {
     static int count = 0;
 
     count++;
@@ -18,7 +22,7 @@ void on_generate_button_clicked(GtkButton *button, GtkBox *box) {
     
     g_signal_connect(new_button, "clicked", G_CALLBACK(open_new_window), GINT_TO_POINTER(count));
 
-    gtk_box_append(GTK_BOX(box), new_button);
+    gtk_flow_box_append(GTK_FLOW_BOX(flow_box), new_button);
 
     //gtk_fixed_put(GTK_FIXED(fixed), new_button, 10, 10 + count * 50);
 

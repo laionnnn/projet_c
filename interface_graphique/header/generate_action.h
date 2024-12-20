@@ -3,6 +3,5 @@
 
 #include <gtk/gtk.h>
 
-void on_generate_add_action(GtkButton *button, GtkBox *actions_box);
-
+void on_action_button_clicked(GtkButton *button, GtkFlowBox *flow_box);
 #endif
