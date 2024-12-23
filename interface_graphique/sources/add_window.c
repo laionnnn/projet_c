@@ -1,6 +1,6 @@
-#include "add_window.h"
-#include "generate_action.h"
-#include "generate_button.h"
+#include "../header/add_window.h"
+#include "../header/generate_action.h"
+#include "../header/generate_button.h"
 #include <gtk/gtk.h>
 
 
