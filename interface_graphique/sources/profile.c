@@ -9,7 +9,6 @@ typedef struct {
     GtkWidget *age_entry;
     GtkWidget *sex_entry;
     GtkWidget *status_entry;
-    GtkWidget *na_entry;
     const char *json_file;
 } UserProfileData;
 
@@ -109,10 +108,6 @@ void create_user_profile_window(gpointer user_data) {
     profile_data->status_entry = gtk_entry_new();
     gtk_grid_attach(GTK_GRID(grid), gtk_label_new("Status:"), 0, 4, 1, 1);
     gtk_grid_attach(GTK_GRID(grid), profile_data->status_entry, 1, 4, 1, 1);
-
-    profile_data->na_entry = gtk_entry_new();
-    gtk_grid_attach(GTK_GRID(grid), gtk_label_new("NA:"), 0, 5, 1, 1);
-    gtk_grid_attach(GTK_GRID(grid), profile_data->na_entry, 1, 5, 1, 1);
 
     // Ajouter un bouton pour enregistrer
     GtkWidget *button = gtk_button_new_with_label("Enregistrer");
