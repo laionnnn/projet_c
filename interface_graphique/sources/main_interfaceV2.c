@@ -51,7 +51,7 @@ static void activate(GtkApplication* app, gpointer user_data) {
 
     // Connecter les signaux pour les clics sur les boutons
     g_signal_connect(button_add, "clicked", G_CALLBACK(on_generate_button_clicked), flow_box);
-    g_signal_connect(button_user_profile, "clicked", G_CALLBACK(create_user_profile_window), NULL);
+    g_signal_connect(button_user_profile, "clicked", G_CALLBACK(create_user_profile_window), "../../data/user_profile/user1.json");
 
     // Définir le contenu de la fenêtre (le GtkStack)
     gtk_window_set_title(GTK_WINDOW(window), "Page Principale");

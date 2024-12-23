@@ -13,12 +13,12 @@ typedef struct {
 } UserProfileData;
 
 // Fonction pour mettre à jour le fichier JSON avec les données utilisateur
-void update_user_profile(gpointer data) {
+void update_user_profile(GtkWidget *widget, gpointer data) {
     UserProfileData *profile_data = (UserProfileData *)data;
 
     // Récupérer les valeurs des champs d'entrée
     const char *name = gtk_editable_get_text(GTK_EDITABLE(profile_data->name_entry));
-    const char *familyname = gtk_editable_get_text(GTK_EDITABLE(profile_data->familyname_entry));
+    const char *family_name = gtk_editable_get_text(GTK_EDITABLE(profile_data->familyname_entry));
     const char *age = gtk_editable_get_text(GTK_EDITABLE(profile_data->age_entry));
     const char *sex = gtk_editable_get_text(GTK_EDITABLE(profile_data->sex_entry));
     const char *status = gtk_editable_get_text(GTK_EDITABLE(profile_data->status_entry));
@@ -49,10 +49,10 @@ void update_user_profile(gpointer data) {
         if (user_profile) {
             // Modifier les champs dans `user_profile`
             json_object_object_add(user_profile, "name", json_object_new_string(name));
-            json_object_object_add(user_profile, "familyname", json_object_new_string(familyname));
+            json_object_object_add(user_profile, "family_name", json_object_new_string(family_name));
             json_object_object_add(user_profile, "age", json_object_new_string(age));
             json_object_object_add(user_profile, "sex", json_object_new_string(sex));
-            json_object_object_add(user_profile, "status", json_object_new_string(status));
+            json_object_object_add(user_profile, "statue", json_object_new_string(status));
             g_print("Profil utilisateur mis à jour avec succès.\n");
         }
     }
@@ -73,11 +73,12 @@ void update_user_profile(gpointer data) {
 }
 
 // Fonction pour créer une fenêtre GTK 4
+
 void create_user_profile_window(gpointer user_data) {
-    const char *json_file = (const char *)user_data;
+    const char *json_data = (const char *)user_data;
 
     UserProfileData *profile_data = g_malloc(sizeof(UserProfileData));
-    profile_data->json_file = json_file;
+    profile_data->json_file = json_data;
 
     // Créer une fenêtre
     GtkWidget *window = gtk_window_new();
