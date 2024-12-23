@@ -1,10 +1,7 @@
 #include <gtk/gtk.h>
-#include "add_window.h"
-#include "generate_button.h"
+#include "../header/add_window.h"
+#include "../header/generate_button.h"
 
-#include <gtk/gtk.h>
-#include "add_window.h"
-#include "generate_button.h"
 
 // Function that generate new button when you click on a button
 void on_generate_button_clicked(GtkButton *button, GtkFlowBox *flow_box) {

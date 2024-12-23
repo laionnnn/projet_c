@@ -1,11 +1,5 @@
-#include "generate_action.h"
-#include "add_window.h"
-#include <gtk/gtk.h>
-
-
-
-// Function that generate new flow box when you click on a button
-#include "generate_action.h"
+#include "../header/add_window.h"
+#include "../header/generate_action.h"
 #include <gtk/gtk.h>
 
 // Function that generates a new list box row when a button is clicked
