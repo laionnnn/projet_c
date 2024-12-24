@@ -1,65 +1,32 @@
 {
-
-    "user_profile" : [
-
+  "user_profile":[
+    {
+      "name":"aaaaa",
+      "familyname":"qwerewq",
+      "age":"123",
+      "sex":"m",
+      "status":"eeeee",
+      "na":"qqqqq"
+    }
+  ],
+  "routine":[
+    {
+      "name":"bbb",
+      "description":"aaa",
+      "iteration_goal":"bbbbb",
+      "time":"111111",
+      "action":[
         {
-
-        "name" : "léon",
-        "family name" : "frénéa",
-        "age" : 20,
-        "sexe" : "M",
-        "statue" : "student",
-        "mdp" : ""
-
-        }
-
-    ],
-
-    "routine" : [
-
+          "name":"new_action_2",
+          "description":"abc",
+          "constraints":"def"
+        },
         {
-
-            "name" : "muscu",
-            "description" : "first test of routine",
-            "iteration goal" : "1 a week",
-            "time" : "",
-            "score" : [
-
-                {
-
-                "score" : "",
-                "malus" : "",
-                "bonus" : ""
-
-                }
-
-            ],
-
-            "action" : [
-
-                {
-
-                "name" : "bench",
-                "description" : "five sets of ten",
-                "constraintes" : "rest time : 5 min"
-
-                },
-
-                {
-
-                "name" : "press",
-                "description" : "ten set of five",
-                "constraintes" : "rest time : 5 min"
-
-                }
-
-
-            ]
-        
-
+          "name":"new_action_2",
+          "description":"abc",
+          "constraints":"def"
         }
-
-
-    ]
-
+      ]
+    }
+  ]
 }
