@@ -1,0 +1,15 @@
+{
+    "routines":
+    [
+        {"id":1,"name":"Routine 1"},
+        {"id":2,"name":"Routine 2"},
+        {"id":3,"name":"Routine 3"},
+        {"id":4,"name":"Routine 4"},
+        {"id":5,"name":"Routine 5"},
+        {"id":6,"name":"Routine 6"},
+        {"id":7,"name":"Routine 1"},
+        {"id":8,"name":"Routine 2"},
+        {"id":9,"name":"Routine 3"},
+        {"id":10,"name":"Routine 4"}
+    ]
+}

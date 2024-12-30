@@ -3,6 +3,7 @@
 
 #include "../header/generate_button.h"
 #include "../header/profile.h"
+#include "../header/load_routine.h"
 
 
 static void activate(GtkApplication* app, gpointer user_data) {
@@ -53,7 +54,8 @@ static void activate(GtkApplication* app, gpointer user_data) {
     g_signal_connect(button_add, "clicked", G_CALLBACK(on_generate_button_clicked), flow_box);
     g_signal_connect(button_user_profile, "clicked", G_CALLBACK(create_user_profile_window), "user1.json");
 
-    // Définir le contenu de la fenêtre (le GtkStack)
+    load_routines_from_json(GTK_FLOW_BOX(flow_box), "routine.json");
+
     gtk_window_set_title(GTK_WINDOW(window), "Page Principale");
     gtk_window_set_default_size(GTK_WINDOW(window), 700, 700);
     gtk_window_set_child(GTK_WINDOW(window), fixed_main);

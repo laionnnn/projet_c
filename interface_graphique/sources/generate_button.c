@@ -1,6 +1,7 @@
 #include <gtk/gtk.h>
 #include "../header/add_window.h"
 #include "../header/generate_button.h"
+#include "../header/add_routine_json.h"
 
 
 // Function that generate new button when you click on a button
@@ -20,8 +21,7 @@ void on_generate_button_clicked(GtkButton *button, GtkFlowBox *flow_box) {
     g_signal_connect(new_button, "clicked", G_CALLBACK(open_new_window), GINT_TO_POINTER(count));
 
     gtk_flow_box_append(GTK_FLOW_BOX(flow_box), new_button);
-
-    //gtk_fixed_put(GTK_FIXED(fixed), new_button, 10, 10 + count * 50);
+    add_routine_to_json("routine.json", label_text);
 
     gtk_widget_set_visible(new_button, TRUE);
 }
