@@ -12,6 +12,9 @@ void on_action_button_clicked(GtkButton *button, GtkFlowBox *flow_box) {
     snprintf(label_text, sizeof(label_text), "Action %d", count);
 
     GtkWidget *new_button = gtk_button_new_with_label(label_text);
+    gtk_widget_set_size_request(new_button, 190, 50); 
+    gtk_button_set_can_shrink(GTK_BUTTON(new_button), FALSE);
+
 
     GtkWidget *check_button = gtk_check_button_new();
     

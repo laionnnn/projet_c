@@ -52,5 +52,8 @@ void reload_routines(GtkWidget *widget, gpointer user_data) {
     GtkFlowBox *flow_box = GTK_FLOW_BOX(user_data); 
     const char *filename = "routine.json"; 
     gtk_flow_box_remove_all(flow_box);
+    GtkWidget *titleFLOWBOX = gtk_label_new("Liste des routines");
+    gtk_widget_set_size_request(titleFLOWBOX, 190, 50); 
+    gtk_flow_box_append(GTK_FLOW_BOX(flow_box), titleFLOWBOX);
     load_routines_from_json(flow_box, filename);
 }

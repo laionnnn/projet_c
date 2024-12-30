@@ -3,11 +3,6 @@
 #include <string.h>
 #include <stdio.h>
 
-#include <gtk/gtk.h>
-#include <json-c/json.h>
-#include <string.h>
-#include <stdio.h>
-
 void delete_routine(GtkButton *button, gpointer user_data) {
     const char *filename = "routine.json";
 
