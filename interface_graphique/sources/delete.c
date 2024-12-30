@@ -11,20 +11,20 @@
 void delete_routine(GtkButton *button, gpointer user_data) {
     const char *filename = "routine.json";
 
-    // Récupération du texte de l'entrée utilisateur
+    // Récupère le texte
     const char *routine_name = gtk_editable_get_text(GTK_EDITABLE(user_data));
 
     struct json_object *parsed_json, *routines_array, *routine;
     int found = 0;
 
-    // Charger le fichier JSON
+    // Charger le json
     parsed_json = json_object_from_file(filename);
     if (!parsed_json) {
         g_warning("Impossible de lire le fichier JSON : %s", filename);
         return;
     }
 
-    // Récupérer le tableau de routines
+    // Récupère le tableau
     if (!json_object_object_get_ex(parsed_json, "routines", &routines_array)) {
         g_warning("Tableau de routines non trouvé.");
         json_object_put(parsed_json);
@@ -45,7 +45,7 @@ void delete_routine(GtkButton *button, gpointer user_data) {
     }
 
     if (found) {
-        // Sauvegarder le fichier modifié
+        // Sauvegarder le fichier modifié en version lisible
         if (json_object_to_file_ext(filename, parsed_json, JSON_C_TO_STRING_PRETTY) < 0) {
             fprintf(stderr, "Erreur lors de la sauvegarde du fichier JSON.\n");
         } else {

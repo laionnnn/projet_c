@@ -74,7 +74,7 @@ void update_user_profile(GtkWidget *widget, gpointer data) {
 
 // Fonction pour créer une fenêtre GTK 4
 
-void create_user_profile_window(const char *data, gpointer user_data) {
+void user_profile_window(const char *data, gpointer user_data) {
     const char *json_file = user_data;
 
     // Allouer la structure pour stocker les données utilisateur
