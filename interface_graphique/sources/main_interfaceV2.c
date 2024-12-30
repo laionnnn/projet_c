@@ -1,8 +1,11 @@
 #include <gtk/gtk.h>
 #include <json-c/json.h>
-
 #include "../header/generate_button.h"
 #include "../header/profile.h"
+#include "../header/load_routine.h"
+#include "../header/delete.h"
+#include "../header/rename.h"
+
 
 
 static void activate(GtkApplication* app, gpointer user_data) {
@@ -14,51 +17,80 @@ static void activate(GtkApplication* app, gpointer user_data) {
     GtkWidget *button_user_profile = gtk_button_new_with_label("Profile");
     GtkWidget *routine_research = gtk_search_entry_new();
     GtkWidget *button_back = gtk_button_new_with_label("Retour à la page principale");
+    GtkWidget *delete_entry = gtk_entry_new();
+    GtkWidget *old_name = gtk_entry_new();
+    GtkWidget *new_name = gtk_entry_new();
+    GtkWidget *delete = gtk_button_new_with_label("Supprimer");
+    GtkWidget *reload = gtk_button_new_with_label("Actualiser");
+    GtkWidget *rename_button = gtk_button_new_with_label("Renommer");
+
+
+    // Ajoute le texte pour delete_entry
+    gtk_entry_set_placeholder_text(GTK_ENTRY(delete_entry), "Supprimer une routine");
+    gtk_entry_set_placeholder_text(GTK_ENTRY(old_name), "Renommer : ancien nom");
+    gtk_entry_set_placeholder_text(GTK_ENTRY(new_name), "Renommer : nouveau nom");
 
     // Créer un conteneur GtkFixed
     GtkWidget *fixed_main = gtk_fixed_new();
 
     // Positionner les boutons à des endroits spécifiques
-    gtk_fixed_put(GTK_FIXED(fixed_main), button_add, 650, 0);  // Position à (650, 0)
-    gtk_fixed_put(GTK_FIXED(fixed_main), button_stats, 0, 0);   // Position à (0, 0)
-    gtk_fixed_put(GTK_FIXED(fixed_main), button_user_profile, 0, 50);  // Position à (0, 50)
-    gtk_fixed_put(GTK_FIXED(fixed_main), routine_research, 200, 0);  // Position à (200, 0)
+    gtk_fixed_put(GTK_FIXED(fixed_main), button_add, 650, 0);  
+    gtk_fixed_put(GTK_FIXED(fixed_main), reload, 650, 100);  
+    gtk_fixed_put(GTK_FIXED(fixed_main), button_stats, 0, 0);
+    gtk_fixed_put(GTK_FIXED(fixed_main), rename_button, 0, 100);  
+    gtk_fixed_put(GTK_FIXED(fixed_main), button_user_profile, 0, 50);
+    gtk_fixed_put(GTK_FIXED(fixed_main), routine_research, 200, 0);
+    gtk_fixed_put(GTK_FIXED(fixed_main), delete_entry, 200, 50);
+    gtk_fixed_put(GTK_FIXED(fixed_main), delete, 650, 50);
+    gtk_fixed_put(GTK_FIXED(fixed_main), old_name, 200, 100);
+    gtk_fixed_put(GTK_FIXED(fixed_main), new_name, 425, 100);
 
     // Définir une taille spécifique pour chaque bouton
-    gtk_widget_set_size_request(button_add, 200, 50); 
+    gtk_widget_set_size_request(button_add, 200, 50);
+    gtk_widget_set_size_request(rename_button, 200, 50);
+    gtk_widget_set_size_request(reload, 200, 50); 
     gtk_widget_set_size_request(button_stats, 200, 50);
     gtk_widget_set_size_request(button_back, 200, 50);
     gtk_widget_set_size_request(button_user_profile, 200, 50);
+    gtk_widget_set_size_request(delete, 200, 50);
     gtk_widget_set_size_request(routine_research, 450, 50);
+    gtk_widget_set_size_request(delete_entry, 450, 50);
+    gtk_widget_set_size_request(old_name, 225, 50);
+    gtk_widget_set_size_request(new_name, 225, 50);
 
 
-    // Créer une petite GtkBox à l'intérieur du conteneur fixed
+    // Crée une flowbox pour faire une liste de routine
     GtkWidget *flow_box = gtk_flow_box_new();
     gtk_widget_set_size_request(flow_box, 200, 450);
-
-    // Ajouter des widgets à la boîte (comme une étiquette)
-    GtkWidget *titleFLOWBOX = gtk_label_new("Liste des routines");
     gtk_flow_box_set_max_children_per_line(GTK_FLOW_BOX(flow_box), 1);
+    
+    GtkWidget *titleFLOWBOX = gtk_label_new("Liste des routines");
     gtk_flow_box_append(GTK_FLOW_BOX(flow_box), titleFLOWBOX);
 
-    // Définir la boîte comme enfant de la fenêtre défilante
     GtkWidget *scrolled_window_with_box = gtk_scrolled_window_new();
-    gtk_widget_set_size_request(scrolled_window_with_box, 200, 550);
+    gtk_widget_set_size_request(scrolled_window_with_box, 200, 450);
     gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(scrolled_window_with_box), flow_box);
 
     // Positionner la boîte à l'intérieur du conteneur fixed
-    gtk_fixed_put(GTK_FIXED(fixed_main), scrolled_window_with_box, 325, 100);
+    gtk_fixed_put(GTK_FIXED(fixed_main), scrolled_window_with_box, 325, 200);
 
     // Connecter les signaux pour les clics sur les boutons
     g_signal_connect(button_add, "clicked", G_CALLBACK(on_generate_button_clicked), flow_box);
-    g_signal_connect(button_user_profile, "clicked", G_CALLBACK(create_user_profile_window), "user1.json");
+    g_signal_connect(button_user_profile, "clicked", G_CALLBACK(user_profile_window), "user1.json");
+    g_signal_connect(delete, "clicked", G_CALLBACK(delete_routine), delete_entry);
+    g_signal_connect(reload, "clicked", G_CALLBACK(reload_routines), flow_box);
+    g_signal_connect(rename_button, "clicked", G_CALLBACK(rename_gtk), old_name);
+    g_object_set_data(G_OBJECT(rename_button), "new_name_entry", new_name);
 
-    // Définir le contenu de la fenêtre (le GtkStack)
+    // Charge les routines enregistrer
+    load_routines_from_json(GTK_FLOW_BOX(flow_box), "routine.json");
+
+    // Détail de la fenêtre principale
     gtk_window_set_title(GTK_WINDOW(window), "Page Principale");
     gtk_window_set_default_size(GTK_WINDOW(window), 700, 700);
     gtk_window_set_child(GTK_WINDOW(window), fixed_main);
 
-    // Enfin, afficher la fenêtre
+    // Afficher la fenêtre
     gtk_window_present(GTK_WINDOW(window));
 }
 

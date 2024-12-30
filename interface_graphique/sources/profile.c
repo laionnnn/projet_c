@@ -74,7 +74,7 @@ void update_user_profile(GtkWidget *widget, gpointer data) {
 
 // Fonction pour créer une fenêtre GTK 4
 
-void create_user_profile_window(const char *data, gpointer user_data) {
+void user_profile_window(const char *data, gpointer user_data) {
     const char *json_file = user_data;
 
     // Allouer la structure pour stocker les données utilisateur
@@ -123,19 +123,20 @@ void create_user_profile_window(const char *data, gpointer user_data) {
 
     GtkWidget *window = gtk_window_new();
     gtk_window_set_title(GTK_WINDOW(window), "Modifier User Profile");
-    gtk_window_set_default_size(GTK_WINDOW(window), 400, 300);
+    gtk_window_set_default_size(GTK_WINDOW(window), 210, 205);
+    gtk_window_set_resizable(window, FALSE);
 
     GtkWidget *grid = gtk_grid_new();
     gtk_window_set_child(GTK_WINDOW(window), grid);
 
     profile_data->name_entry = gtk_entry_new();
     gtk_entry_set_placeholder_text(GTK_ENTRY(profile_data->name_entry), n);
-    gtk_grid_attach(GTK_GRID(grid), gtk_label_new("Name:"), 0, 0, 1, 1);
+    gtk_grid_attach(GTK_GRID(grid), gtk_label_new("Prénom:"), 0, 0, 1, 1);
     gtk_grid_attach(GTK_GRID(grid), profile_data->name_entry, 1, 0, 1, 1);
 
     profile_data->familyname_entry = gtk_entry_new();
     gtk_entry_set_placeholder_text(GTK_ENTRY(profile_data->familyname_entry), family_n);
-    gtk_grid_attach(GTK_GRID(grid), gtk_label_new("Family Name:"), 0, 1, 1, 1);
+    gtk_grid_attach(GTK_GRID(grid), gtk_label_new("Nom:"), 0, 1, 1, 1);
     gtk_grid_attach(GTK_GRID(grid), profile_data->familyname_entry, 1, 1, 1, 1);
 
     profile_data->age_entry = gtk_entry_new();
@@ -145,7 +146,7 @@ void create_user_profile_window(const char *data, gpointer user_data) {
 
     profile_data->sexe_entry = gtk_entry_new();
     gtk_entry_set_placeholder_text(GTK_ENTRY(profile_data->sexe_entry), sexeMF);
-    gtk_grid_attach(GTK_GRID(grid), gtk_label_new("Sex:"), 0, 3, 1, 1);
+    gtk_grid_attach(GTK_GRID(grid), gtk_label_new("Sexe:"), 0, 3, 1, 1);
     gtk_grid_attach(GTK_GRID(grid), profile_data->sexe_entry, 1, 3, 1, 1);
 
     profile_data->status_entry = gtk_entry_new();
