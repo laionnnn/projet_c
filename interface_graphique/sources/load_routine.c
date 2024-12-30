@@ -40,3 +40,13 @@ void load_routines_from_json(GtkFlowBox *flow_box, const char *filename) {
 
     json_object_put(parsed_json);  // Libérer la mémoire JSON
 }
+
+void reload_routines(GtkWidget *widget, gpointer user_data) {
+    GtkFlowBox *flow_box = GTK_FLOW_BOX(user_data);  // Caster user_data en GtkFlowBox
+    const char *filename = "routine.json";  // Vous pouvez modifier cela selon votre besoin
+
+    // Supprimer tous les enfants existants
+        gtk_flow_box_remove_all(flow_box);
+    // Recharger les routines depuis le fichier JSON
+    load_routines_from_json(flow_box, filename);
+}

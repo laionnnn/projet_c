@@ -45,6 +45,13 @@ void add_routine_to_json(const char *filename, const char *name) {
         printf("Routine ajoutée avec succès : %s (ID : %d)\n", name, next_id);
     }
 
+    // Sauvegarder dans le fichier avec un formatage lisible
+    if (json_object_to_file_ext(filename, parsed_json, JSON_C_TO_STRING_PRETTY) < 0) {
+        fprintf(stderr, "Erreur : Impossible de sauvegarder dans le fichier JSON\n");
+    } else {
+        printf("Routine ajoutée avec succès : %s (ID : %d)\n", name, next_id);
+    }
+
     // Libérer la mémoire JSON
     json_object_put(parsed_json);
 }

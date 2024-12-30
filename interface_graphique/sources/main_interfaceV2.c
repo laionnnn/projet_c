@@ -1,9 +1,10 @@
 #include <gtk/gtk.h>
 #include <json-c/json.h>
-
 #include "../header/generate_button.h"
 #include "../header/profile.h"
 #include "../header/load_routine.h"
+#include "../header/delete.h"
+
 
 
 static void activate(GtkApplication* app, gpointer user_data) {
@@ -15,22 +16,35 @@ static void activate(GtkApplication* app, gpointer user_data) {
     GtkWidget *button_user_profile = gtk_button_new_with_label("Profile");
     GtkWidget *routine_research = gtk_search_entry_new();
     GtkWidget *button_back = gtk_button_new_with_label("Retour à la page principale");
+    GtkWidget *delete_entry = gtk_entry_new();
+    GtkWidget *save = gtk_button_new_with_label("Enregistrer");
+    GtkWidget *reload = gtk_button_new_with_label("Actualiser");
+
+
+    // Ajoute le texte pour delete_entry
+    gtk_entry_set_placeholder_text(GTK_ENTRY(delete_entry), "Supprimer une routine");
 
     // Créer un conteneur GtkFixed
     GtkWidget *fixed_main = gtk_fixed_new();
 
     // Positionner les boutons à des endroits spécifiques
     gtk_fixed_put(GTK_FIXED(fixed_main), button_add, 650, 0);  // Position à (650, 0)
+    gtk_fixed_put(GTK_FIXED(fixed_main), reload, 650, 50);  // Position à (650, 0)
     gtk_fixed_put(GTK_FIXED(fixed_main), button_stats, 0, 0);   // Position à (0, 0)
     gtk_fixed_put(GTK_FIXED(fixed_main), button_user_profile, 0, 50);  // Position à (0, 50)
     gtk_fixed_put(GTK_FIXED(fixed_main), routine_research, 200, 0);  // Position à (200, 0)
+    gtk_fixed_put(GTK_FIXED(fixed_main), delete_entry, 200, 50);  // Position à (200, 0)
+    gtk_fixed_put(GTK_FIXED(fixed_main), save, 550, 50);  // Position à (200, 0)
 
     // Définir une taille spécifique pour chaque bouton
     gtk_widget_set_size_request(button_add, 200, 50); 
+    gtk_widget_set_size_request(reload, 200, 50); 
     gtk_widget_set_size_request(button_stats, 200, 50);
     gtk_widget_set_size_request(button_back, 200, 50);
     gtk_widget_set_size_request(button_user_profile, 200, 50);
+    gtk_widget_set_size_request(save, 100, 50);
     gtk_widget_set_size_request(routine_research, 450, 50);
+    gtk_widget_set_size_request(delete_entry, 350, 50);
 
 
     // Créer une petite GtkBox à l'intérieur du conteneur fixed
@@ -53,6 +67,9 @@ static void activate(GtkApplication* app, gpointer user_data) {
     // Connecter les signaux pour les clics sur les boutons
     g_signal_connect(button_add, "clicked", G_CALLBACK(on_generate_button_clicked), flow_box);
     g_signal_connect(button_user_profile, "clicked", G_CALLBACK(create_user_profile_window), "user1.json");
+    g_signal_connect(save, "clicked", G_CALLBACK(delete_routine), delete_entry);
+    g_signal_connect(reload, "clicked", G_CALLBACK(reload_routines), flow_box);
+
 
     load_routines_from_json(GTK_FLOW_BOX(flow_box), "routine.json");
 

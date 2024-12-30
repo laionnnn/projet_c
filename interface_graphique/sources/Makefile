@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -g `pkg-config --cflags gtk4 json-c`
 LDFLAGS = `pkg-config --libs gtk4 json-c`
 CPPFLAGS = -Iheader/
 
-SRC = add_window.c generate_button.c generate_action.c profile.c load_routine.c add_routine_json.c
+SRC = add_window.c generate_button.c generate_action.c profile.c load_routine.c add_routine_json.c delete.c
 OBJ = $(SRC:.c=.o)
 EXEC = main_interfaceV2
 
