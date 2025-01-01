@@ -1,6 +1,7 @@
 #include "../header/add_window.h"
 #include "../header/generate_action.h"
 #include "../header/generate_button.h"
+#include "../header/load_routine.h"
 #include <gtk/gtk.h>
 
 
@@ -38,6 +39,9 @@ void open_new_window(GtkButton *button, gpointer user_data, GtkFlowBox *flow_box
     gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(scrolled_window_with_box), routine_flow_box);
     
     gtk_fixed_put(GTK_FIXED(fixed_routine_page), scrolled_window_with_box, 300, 50);
+
+    load_actions_for_routine(GTK_FLOW_BOX(routine_flow_box), "routine.json", window_id);
+
 
     g_signal_connect(button_add, "clicked", G_CALLBACK(on_action_button_clicked), routine_flow_box);
    

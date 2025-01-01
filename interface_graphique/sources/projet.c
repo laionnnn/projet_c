@@ -3,6 +3,7 @@
 #include <string.h>
 #include <json-c/json.h>
 
+/* Used 
 void modifier_user_profile(const char *nom_fichier, const char *champ, const char *nouvelle_valeur) {
     FILE *file;
     char buffer[2048];
@@ -63,6 +64,10 @@ void modifier_user_profile(const char *nom_fichier, const char *champ, const cha
     printf("Modification terminée dans le fichier %s.\n", nom_fichier);
 }
 
+*/
+
+/*
+Used as rename :
 void modifier_routinename(const char *nom_fichier, const char *champ, const char *nouvelle_valeur) {
     FILE *file;
     char buffer[4096];
@@ -129,6 +134,7 @@ void modifier_routinename(const char *nom_fichier, const char *champ, const char
 
     printf("Modification terminée dans le fichier %s.\n", nom_fichier);
 }
+*/
 
 
 void modifier_routine(const char *nom_fichier, const char *champ, const char *nouvelle_valeur) {
@@ -191,12 +197,6 @@ void modifier_routine(const char *nom_fichier, const char *champ, const char *no
 
     printf("Modification terminée dans le fichier %s.\n", nom_fichier);
 }
-
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <json-c/json.h>
 
 // Function to modify a specific field of an action
 void modifier_action(const char *nom_fichier, const char *field, const char *nouvelle_valeur) {

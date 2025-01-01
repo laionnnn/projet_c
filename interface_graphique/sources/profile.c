@@ -122,7 +122,7 @@ void user_profile_window(const char *data, gpointer user_data) {
     }
 
     GtkWidget *window = gtk_window_new();
-    gtk_window_set_title(GTK_WINDOW(window), "Modifier User Profile");
+    gtk_window_set_title(GTK_WINDOW(window), "Modifier le Profile");
     gtk_window_set_default_size(GTK_WINDOW(window), 210, 205);
     gtk_window_set_resizable(window, FALSE);
 

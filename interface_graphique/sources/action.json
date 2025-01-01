@@ -1,0 +1,32 @@
+{
+  "user_profile":[
+    {
+      "name":"aaaaa",
+      "familyname":"qwerewq",
+      "age":"123",
+      "sex":"m",
+      "status":"eeeee",
+      "na":"qqqqq"
+    }
+  ],
+  "routine":[
+    {
+      "name":"bbb",
+      "description":"aaa",
+      "iteration_goal":"bbbbb",
+      "time":"111111",
+      "action":[
+        {
+          "name":"Bench",
+          "description":"Développé couché",
+          "constraints":"5x50kg"
+        },
+        {
+          "name":"new_action_2",
+          "description":"abc",
+          "constraints":"def"
+        }
+      ]
+    }
+  ]
+}

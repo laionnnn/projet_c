@@ -2,6 +2,7 @@
 #include <json-c/json.h>
 #include "../header/load_routine.h"
 #include "../header/add_window.h"
+#include "../header/action_page.h"
 
 
 // Fonction qui permet de charger les routines existantes
@@ -45,6 +46,64 @@ void load_routines_from_json(GtkFlowBox *flow_box, const char *filename) {
 
     json_object_put(parsed_json);  // Libérer la mémoire JSON
 }
+
+void load_actions_for_routine(GtkFlowBox *flow_box, const char *filename, int routine_index) {
+    struct json_object *parsed_json, *routines_array, *routine, *actions_array;
+
+    // Charger le fichier JSON
+    parsed_json = json_object_from_file(filename);
+    if (!parsed_json) {
+        g_warning("Erreur lors de la lecture du fichier JSON.");
+        return;
+    }
+
+    // Récupérer le tableau des routines
+    if (!json_object_object_get_ex(parsed_json, "routines", &routines_array)) {
+        g_warning("Aucune routine trouvée dans le fichier JSON.");
+        json_object_put(parsed_json);
+        return;
+    }
+
+    // Vérifier que l'index est valide
+    if (routine_index >= json_object_array_length(routines_array)) {
+        g_warning("Index de routine invalide.");
+        json_object_put(parsed_json);
+        return;
+    }
+
+    // Récupérer la routine correspondante
+    routine = json_object_array_get_idx(routines_array, routine_index);
+
+    // Récupérer les actions de la routine
+    if (!json_object_object_get_ex(routine, "actions", &actions_array)) {
+        g_warning("Aucune action trouvée pour cette routine.");
+        json_object_put(parsed_json);
+        return;
+    }
+
+    // Parcourir et afficher les actions
+    int actions_len = json_object_array_length(actions_array);
+    for (int i = 0; i < actions_len; i++) {
+        struct json_object *action = json_object_array_get_idx(actions_array, i);
+
+        // Formater le label du bouton
+        char button_label[50];
+        snprintf(button_label, sizeof(button_label), "Action %d", i + 1);
+
+        // Créer un bouton pour chaque action
+        GtkWidget *action_button = gtk_button_new_with_label(button_label);
+        GtkWidget *check_button = gtk_check_button_new();
+
+        g_signal_connect(action_button, "clicked", G_CALLBACK(action_window), "routine.json");
+        // Ajouter le bouton au FlowBox
+        gtk_flow_box_append(flow_box, action_button);
+        gtk_flow_box_append(flow_box, check_button);
+        gtk_widget_set_visible(action_button, TRUE);
+    }
+
+    json_object_put(parsed_json);  // Libérer la mémoire JSON
+}
+
 
 
 // Fonction qui permet d'actualiser 
