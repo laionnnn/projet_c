@@ -15,6 +15,12 @@
           "name":"Squat",
           "description":"Squat complet",
           "constraints":"4x80kg"
+        },
+        {
+          "id":3,
+          "name":"Bench",
+          "description":"Développé couché",
+          "constraints":"5x50kg"
         }
       ]
     },

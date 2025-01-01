@@ -3,6 +3,8 @@
 #include "../header/action_page.h"
 #include <gtk/gtk.h>
 
+
+
 // Fonction qui crée une nouvelle action et qui l'ajoute dans la flowbox
 void on_action_button_clicked(GtkButton *button, GtkFlowBox *flow_box) {
     static int count = 0;
