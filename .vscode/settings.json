@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "add_window.h": "c",
+        "generate_button.h": "c",
+        "cjson.h": "c",
+        "generate_action.h": "c",
+        "profile.h": "c",
+        "load_routine.h": "c",
+        "stdio.h": "c"
+    }
+}

@@ -17,3 +17,5 @@ $(EXEC): main_interfaceV2.o $(OBJ)
 
 clean:
 	rm -f *.o $(EXEC)
+
+.PHONY :  all clean

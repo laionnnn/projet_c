@@ -1,0 +1,49 @@
+{
+    "routine" : [
+
+        {
+
+            "name" : "muscu",
+            "description" : "first test of routine",
+            "iteration goal" : "1 a week",
+            "time" : "",
+            "score" : [
+
+                {
+
+                "score" : "",
+                "malus" : "",
+                "bonus" : ""
+
+                }
+
+            ],
+
+            "action" : [
+
+                {
+
+                "name" : "bench",
+                "description" : "five sets of ten",
+                "constraintes" : "rest time : 5 min"
+
+                },
+
+                {
+
+                "name" : "press",
+                "description" : "ten set of five",
+                "constraintes" : "rest time : 5 min"
+
+                }
+
+
+            ]
+        
+
+        }
+
+
+    ]
+
+}
