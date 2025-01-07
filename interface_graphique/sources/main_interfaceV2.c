@@ -5,6 +5,7 @@
 #include "../header/load_routine.h"
 #include "../header/delete.h"
 #include "../header/rename.h"
+#include "../header/interface_stat.h"
 
 
 
@@ -75,6 +76,7 @@ static void activate(GtkApplication* app, gpointer user_data) {
     gtk_fixed_put(GTK_FIXED(fixed_main), scrolled_window_with_box, 325, 200);
 
     // Connecter les signaux pour les clics sur les boutons
+    g_signal_connect(button_stats, "clicked", G_CALLBACK(interface_stat), NULL);
     g_signal_connect(button_add, "clicked", G_CALLBACK(on_generate_button_clicked), flow_box);
     g_signal_connect(button_user_profile, "clicked", G_CALLBACK(user_profile_window), "user1.json");
     g_signal_connect(delete, "clicked", G_CALLBACK(delete_routine), delete_entry);
