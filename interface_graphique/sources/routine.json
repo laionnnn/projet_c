@@ -1,50 +1,16 @@
 {
   "routines":[
     {
-      "id":1,
-      "name":"Routine 1",
-      "actions":[
-        {
-          "id":1,
-          "name":"Bench",
-          "description":"Développé couché",
-          "constraints":"5x50kg"
-        },
-        {
-          "id":2,
-          "name":"Squat",
-          "description":"Squat complet",
-          "constraints":"4x80kg"
-        },
-        {
-          "id":3,
-          "name":"Bench",
-          "description":"Développé couché",
-          "constraints":"5x50kg"
-        }
-      ]
-    },
-    {
-      "id":2,
-      "name":"Routine 2",
-      "actions":[
-        {
-          "id":1,
-          "name":"Deadlift",
-          "description":"Soulevé de terre",
-          "constraints":"3x100kg"
-        },
-        {
-          "id":2,
-          "name":"Pull-up",
-          "description":"Tractions",
-          "constraints":"10 répétitions"
-        }
-      ]
-    },
-    {
       "id":3,
+      "name":"sport"
+    },
+    {
+      "id":4,
       "name":"Routine 1"
+    },
+    {
+      "id":5,
+      "name":"Routine 2"
     }
   ]
 }
