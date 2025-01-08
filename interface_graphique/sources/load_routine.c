@@ -27,7 +27,7 @@ void load_routines_from_json(GtkFlowBox *flow_box, const char *filename) {
 
     // Parcours du tableau json, crée un bouton pour chaque ID
     struct json_object *routines_array;
-    if (json_object_object_get_ex(parsed_json, "routines", &routines_array)) {
+    if (json_object_object_get_ex(parsed_json, "actions", &routines_array)) {
         int array_len = json_object_array_length(routines_array);
         for (int i = 0; i < array_len; i++) {
             struct json_object *routine = json_object_array_get_idx(routines_array, i);
@@ -37,7 +37,7 @@ void load_routines_from_json(GtkFlowBox *flow_box, const char *filename) {
             GtkWidget *button = gtk_button_new_with_label(name);
 
             // Connecter le bouton à la fonction d'ouvrir une fênetre
-            g_signal_connect(button, "clicked", G_CALLBACK(open_new_window), GINT_TO_POINTER(i));
+            g_signal_connect(button, "clicked", G_CALLBACK(action_window), GINT_TO_POINTER(i));
 
             gtk_flow_box_append(GTK_FLOW_BOX(flow_box), button);
             gtk_widget_set_visible(button, TRUE);
@@ -109,9 +109,9 @@ void load_actions_for_routine(GtkFlowBox *flow_box, const char *filename, int ro
 // Fonction qui permet d'actualiser 
 void reload_routines(GtkWidget *widget, gpointer user_data) {
     GtkFlowBox *flow_box = GTK_FLOW_BOX(user_data); 
-    const char *filename = "routine.json"; 
+    const char *filename = "action.json"; 
     gtk_flow_box_remove_all(flow_box);
-    GtkWidget *titleFLOWBOX = gtk_label_new("Liste des routines");
+    GtkWidget *titleFLOWBOX = gtk_label_new("Liste des actions");
     gtk_widget_set_size_request(titleFLOWBOX, 190, 50); 
     gtk_flow_box_append(GTK_FLOW_BOX(flow_box), titleFLOWBOX);
     load_routines_from_json(flow_box, filename);

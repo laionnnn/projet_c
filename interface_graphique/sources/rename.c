@@ -6,7 +6,7 @@
 
 void rename_routine(const char *old_name, const char *new_name) {
 
-    const char *filename = "routine.json"; 
+    const char *filename = "action.json"; 
     struct json_object *parsed_json, *routines_array;
     
     // Charger le fichier JSON
@@ -17,7 +17,7 @@ void rename_routine(const char *old_name, const char *new_name) {
     }
 
     // Récupérer le tableau des routines
-    if (!json_object_object_get_ex(parsed_json, "routines", &routines_array)) {
+    if (!json_object_object_get_ex(parsed_json, "actions", &routines_array)) {
         g_warning("Aucune routine trouvée dans le fichier JSON.");
         json_object_put(parsed_json); // Libérer la mémoire
         return;
@@ -44,7 +44,7 @@ void rename_routine(const char *old_name, const char *new_name) {
 
     // Si la routine a été trouvée et renommée, sauvegarder les changements
     if (routine_found) {
-        if (json_object_to_file(filename, parsed_json) < 0) {
+        if (json_object_to_file_ext(filename, parsed_json, JSON_C_TO_STRING_PRETTY) < 0) {
             g_warning("Erreur lors de l'enregistrement du fichier JSON.");
         } else {
             g_print("Routine renommée avec succès : %s -> %s\n", old_name, new_name);
