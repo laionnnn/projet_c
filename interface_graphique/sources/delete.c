@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 void delete_routine(GtkButton *button, gpointer user_data) {
-    const char *filename = "routine.json";
+    const char *filename = "action.json";
 
     // Récupère le texte
     const char *routine_name = gtk_editable_get_text(GTK_EDITABLE(user_data));
@@ -20,7 +20,7 @@ void delete_routine(GtkButton *button, gpointer user_data) {
     }
 
     // Récupère le tableau
-    if (!json_object_object_get_ex(parsed_json, "routines", &routines_array)) {
+    if (!json_object_object_get_ex(parsed_json, "actions", &routines_array)) {
         g_warning("Tableau de routines non trouvé.");
         json_object_put(parsed_json);
         return;

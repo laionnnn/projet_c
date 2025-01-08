@@ -1,6 +1,5 @@
-{
-    "routines":[
-      {
+{"routines":[
+    {
         "id":1,
         "name":"Routine 1",
         "creationDate":"1-1-2025",
@@ -9,4 +8,4 @@
       }
 
     ]
-  }
+}
