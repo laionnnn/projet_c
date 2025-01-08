@@ -1,5 +1,4 @@
 {
-
     "user_profile" : [
 
         {
@@ -8,9 +7,7 @@
         "family_name" : "frénéa",
         "age" : "20",
         "sexe" : "M",
-        "statue" : "student",
-        "mdp" : ""
-
+        "statue" : "student"
         }
 
     ]

@@ -78,7 +78,7 @@ static void activate(GtkApplication* app, gpointer user_data) {
     // Connecter les signaux pour les clics sur les boutons
     g_signal_connect(button_stats, "clicked", G_CALLBACK(interface_stat), NULL);
     g_signal_connect(button_add, "clicked", G_CALLBACK(on_generate_button_clicked), flow_box);
-    g_signal_connect(button_user_profile, "clicked", G_CALLBACK(user_profile_window), "data/user_profile/user1.json");
+    g_signal_connect(button_user_profile, "clicked", G_CALLBACK(user_profile_window), "user1.json");
     g_signal_connect(delete, "clicked", G_CALLBACK(delete_routine), delete_entry);
     g_signal_connect(reload, "clicked", G_CALLBACK(reload_routines), flow_box);
     g_signal_connect(rename_button, "clicked", G_CALLBACK(rename_gtk), old_name);

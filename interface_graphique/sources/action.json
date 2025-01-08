@@ -1,38 +1,39 @@
 {
-
-    "actions":[
-
-        {
-            "id":1,
-            "name":"pompes",
-            "description":"cnoenconc",
-            "contraints":"10fois",
-            "iteration_compleat":10
-        },
-        {
-            "id":2,
-            "name":"bench",
-            "description":"zcin",
-            "contraints":"10fois",
-            "iteration_compleat":5
-        },
-        {
-            "id":3,
-            "name":"press",
-            "description":"ed",
-            "contraints":"10fois",
-            "iteration_compleat":2
-        },
-        {
-            "id":3,
-            "name":"curl",
-            "description":"ed",
-            "contraints":"10fois",
-            "iteration_compleat":2
-        }
-
-
-    ]
-
-
+  "actions":[
+    {
+      "id":0,
+      "name":"pompes",
+      "description":"barre",
+      "constraints":"10fois",
+      "iteration_compleat":10
+    },
+    {
+      "id":1,
+      "name":"bench",
+      "description":"leg",
+      "constraints":"10fois",
+      "iteration_compleat":5
+    },
+    {
+      "id":2,
+      "name":"press",
+      "description":"leg",
+      "constraints":"10fois",
+      "iteration_compleat":5
+    },
+    {
+      "id":3,
+      "name":"curl",
+      "description":"ed",
+      "constraints":"10fois",
+      "iteration_compleat":2
+    },
+    {
+      "id":4,
+      "name":"Action 0",
+      "description":"",
+      "constraints":"",
+      "iteration_compleat":0
+    }
+  ]
 }
