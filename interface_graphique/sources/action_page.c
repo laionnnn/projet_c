@@ -7,9 +7,9 @@
 typedef struct {
     GtkWidget *description_entry;
     GtkWidget *constraints_entry;
-    GtkWidget *iterations_entry;
+    GtkWidget *iterations_spin; // Utilisation d'un GtkSpinButton
     const char *json_file;
-    int action_id;    // Identifiant de l'action
+    int action_id; // Identifiant de l'action
 } ActionData;
 
 // Fonction pour sauvegarder les modifications des données de l'action
@@ -18,8 +18,7 @@ void save_action_data(GtkWidget *widget, gpointer user_data) {
 
     const char *description = gtk_editable_get_text(GTK_EDITABLE(data->description_entry));
     const char *constraints = gtk_editable_get_text(GTK_EDITABLE(data->constraints_entry));
-    const char *iterations_str = gtk_editable_get_text(GTK_EDITABLE(data->iterations_entry));
-    int iterations = atoi(iterations_str); // Conversion en entier
+    int iterations = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(data->iterations_spin));
 
     FILE *file = fopen(data->json_file, "r");
     if (!file) {
@@ -69,7 +68,7 @@ void save_action_data(GtkWidget *widget, gpointer user_data) {
 
 // Fonction pour créer la fenêtre GTK pour modifier l'action
 void action_window(GtkWidget *widget, gpointer user_data) {
-    int action_id = GPOINTER_TO_INT(user_data);  // Récupère l'ID associé
+    int action_id = GPOINTER_TO_INT(user_data); // Récupère l'ID associé
 
     const char *json_file = "action.json";
 
@@ -82,7 +81,7 @@ void action_window(GtkWidget *widget, gpointer user_data) {
 
     char buffer[4096];
     size_t read_size = fread(buffer, 1, sizeof(buffer) - 1, file);
-    buffer[read_size] = '\0';  // Terminer la chaîne
+    buffer[read_size] = '\0'; // Terminer la chaîne
     fclose(file);
 
     struct json_object *parsed_json = json_tokener_parse(buffer);
@@ -153,12 +152,10 @@ void action_window(GtkWidget *widget, gpointer user_data) {
     GtkWidget *label_iterations = gtk_label_new("Itérations complètes :");
     gtk_grid_attach(GTK_GRID(grid), label_iterations, 0, 2, 1, 1);
 
-    GtkWidget *iterations_entry = gtk_entry_new();
-    char iterations_str[10];
-    snprintf(iterations_str, sizeof(iterations_str), "%d", iterations);
-    gtk_editable_set_text(GTK_EDITABLE(iterations_entry), iterations_str);
-    gtk_grid_attach(GTK_GRID(grid), iterations_entry, 1, 2, 2, 1);
-    act_data->iterations_entry = iterations_entry;
+    GtkWidget *iterations_spin = gtk_spin_button_new_with_range(0, 1000, 1);
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(iterations_spin), iterations);
+    gtk_grid_attach(GTK_GRID(grid), iterations_spin, 1, 2, 2, 1);
+    act_data->iterations_spin = iterations_spin;
 
     GtkWidget *save_button = gtk_button_new_with_label("Enregistrer");
     gtk_grid_attach(GTK_GRID(grid), save_button, 1, 3, 1, 1);
@@ -167,5 +164,5 @@ void action_window(GtkWidget *widget, gpointer user_data) {
 
     gtk_window_present(GTK_WINDOW(window));
 
-    json_object_put(parsed_json);  // Libérer la mémoire JSON
+    json_object_put(parsed_json); // Libérer la mémoire JSON
 }
