@@ -1,9 +1,25 @@
 {
-
-  "id":3,
-  "name":"sport",
-  "creation_date":"10-10-2024",
-  "end_date":"20-10-2024",
-  "iteration_compleat" : 10
-
-}
+    "routines":[
+      {
+        "id":1,
+        "name":"Routine 1",
+        "creationDate":"12-11-2003",
+        "EndDate":"",
+        "iteration":1
+      },
+      {
+        "id":2,
+        "name":"Routine 1"
+        "creationDate":"12-11-2003",
+        "EndDate":"",
+        "iteration":1
+      },
+      {
+        "id":3,
+        "name":"Routine 2",
+        "creationDate":"12-11-2003",
+        "EndDate":"",
+        "iteration":1
+      }
+    ]
+  }
