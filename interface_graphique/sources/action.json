@@ -1,6 +1,6 @@
 {
 
-    "action":[
+    "actions":[
 
         {
             "id":1,
@@ -15,6 +15,20 @@
             "description":"zcin",
             "contraints":"10fois",
             "iteration_compleat":5
+        },
+        {
+            "id":3,
+            "name":"press",
+            "description":"ed",
+            "contraints":"10fois",
+            "iteration_compleat":2
+        },
+        {
+            "id":3,
+            "name":"curl",
+            "description":"ed",
+            "contraints":"10fois",
+            "iteration_compleat":2
         }
 
 

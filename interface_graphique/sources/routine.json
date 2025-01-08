@@ -3,23 +3,10 @@
       {
         "id":1,
         "name":"Routine 1",
-        "creationDate":"12-11-2003",
-        "EndDate":"",
-        "iteration":1
-      },
-      {
-        "id":2,
-        "name":"Routine 1"
-        "creationDate":"12-11-2003",
-        "EndDate":"",
-        "iteration":1
-      },
-      {
-        "id":3,
-        "name":"Routine 2",
-        "creationDate":"12-11-2003",
-        "EndDate":"",
-        "iteration":1
+        "creationDate":"1-1-2025",
+        "EndDate":"20-1-2025",
+        "iteration":6
       }
+
     ]
   }

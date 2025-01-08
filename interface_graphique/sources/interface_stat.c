@@ -6,13 +6,12 @@
 #include <time.h>
 
 //variable de test
-int creation_date[3] = {30,10,2024};
 
-int end_date[3] = {8,12,2024};
-int iteration_compleate = 20;
 
-char *nom[] = {"fonction1", "fonction2", "fonction3", "fonction4","uin","uin","uin","uin","uin"};
-float iteration_compleate_action[9] = {2,3,4,5,2,3,4,5,2};
+
+
+
+
 
 
 //fin variable test
@@ -33,17 +32,77 @@ interface_stat(GtkWidget *widget, gpointer user_data) {
     //----------recuperation donnee----------
 
 
-    struct json_object *parsed_json, *routines_array, *routine;
-    const char *filename = "routine.json";
 
-        // Charger le json
+    struct json_object *parsed_json, *routines_array, *routine;
+    char *filename = "routine.json";
+
+     // Charger le fichier JSON
     parsed_json = json_object_from_file(filename);
     if (!parsed_json) {
-        g_warning("Impossible de lire le fichier JSON : %s", filename);
+        g_warning("Erreur lors de la lecture du fichier JSON.");
         return;
     }
 
-    const char* name = json_object_get_string(json_object_object_get(parsed_json, "name"));
+    // Récupérer le tableau des routines
+    if (!json_object_object_get_ex(parsed_json, "routines", &routines_array)) {
+        g_warning("Aucune routine trouvée dans le fichier JSON.");
+        json_object_put(parsed_json);
+        return;
+    }
+    int routine_index = 0;
+    routine = json_object_array_get_idx(routines_array, routine_index);
+
+    //donnees simples
+
+    const char* name = json_object_get_string(json_object_object_get(routine, "name"));
+    int iteration_compleate = json_object_get_int(json_object_object_get(routine, "iteration"));
+
+
+    //dates
+
+    const char* creation_date_str = json_object_get_string(json_object_object_get(routine, "creationDate")); 
+    int creation_date[3];
+    sscanf(creation_date_str, "%d-%d-%d", &creation_date[0], &creation_date[1], &creation_date[2]);
+
+
+    const char* end_date_str = json_object_get_string(json_object_object_get(routine, "EndDate"));
+    int end_date[3];
+    sscanf(end_date_str, "%d-%d-%d", &end_date[0], &end_date[1], &end_date[2]);
+
+    
+    //actions
+    
+
+    struct json_object *parsed_json2, *action_array, *actions;
+    char *filename2 = "action.json";
+
+    char *nom[20];
+    float iteration_compleate_action[20];
+
+    // Charger le fichier JSON
+    parsed_json2 = json_object_from_file(filename2);
+    if (!parsed_json2) {
+        g_warning("Erreur lors de la lecture du fichier JSON.");
+        return;
+    }
+
+    // Récupérer le tableau des actions
+    if (!json_object_object_get_ex(parsed_json2, "actions", &action_array)) {
+        g_warning("Aucune routine trouvée dans le fichier JSON.");
+        json_object_put(parsed_json2);
+        return;
+    }
+
+    int nb_actions = json_object_array_length(action_array);
+
+    for(int i=0; i<nb_actions; i++){
+        
+        
+        actions = json_object_array_get_idx(action_array, i);        
+        nom[i] = json_object_get_string(json_object_object_get(actions, "name"));
+        iteration_compleate_action[i] = (float)json_object_get_int(json_object_object_get(actions, "id"));
+
+    }
 
 
     //----------calculs----------
@@ -182,7 +241,7 @@ interface_stat(GtkWidget *widget, gpointer user_data) {
 
     //-------------------------------éléments routine-------------------------------
 
-    int num_labels = sizeof(nom)/sizeof(nom[1]);
+    int num_labels = nb_actions;
 
     if (num_labels > 0){
 
