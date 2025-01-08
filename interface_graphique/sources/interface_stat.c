@@ -1,20 +1,18 @@
 #include <gtk/gtk.h>
 #include <stdio.h>
 #include "../header/stat.h"
+#include <string.h>
+#include <json-c/json.h>
+#include <time.h>
 
 //variable de test
 int creation_date[3] = {30,10,2024};
-int actual_date[3] = {3,12,2024};
+
 int end_date[3] = {8,12,2024};
 int iteration_compleate = 20;
 
-int hour[3] = {2,10,20};
-int return_date[3];
-int second = 7820;
 char *nom[] = {"fonction1", "fonction2", "fonction3", "fonction4","uin","uin","uin","uin","uin"};
 float iteration_compleate_action[9] = {2,3,4,5,2,3,4,5,2};
-
-
 
 
 //fin variable test
@@ -22,7 +20,37 @@ float iteration_compleate_action[9] = {2,3,4,5,2,3,4,5,2};
 void
 interface_stat(GtkWidget *widget, gpointer user_data) {
 
+    //----------recuperation date----------
+
+    time_t now;
+    struct tm *local_time;
+
+    time(&now);
+    local_time = localtime(&now);
+    int actual_date[3] = {local_time->tm_mday, local_time->tm_mon + 1, local_time->tm_year + 1900};
+
+
+    //----------recuperation donnee----------
+
+
+    struct json_object *parsed_json, *routines_array, *routine;
+    const char *filename = "routine.json";
+
+        // Charger le json
+    parsed_json = json_object_from_file(filename);
+    if (!parsed_json) {
+        g_warning("Impossible de lire le fichier JSON : %s", filename);
+        return;
+    }
+
+    const char* name = json_object_get_string(json_object_object_get(parsed_json, "name"));
+
+
+    //----------calculs----------
+
     float nb_day_since_start = dif_date(creation_date,actual_date);
+
+    //----------interface----------
 
     // Créer une nouvelle fenêtre
     GtkWidget *window = gtk_window_new();
