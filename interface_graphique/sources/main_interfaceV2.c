@@ -6,8 +6,7 @@
 #include "../header/delete.h"
 #include "../header/rename.h"
 #include "../header/interface_stat.h"
-
-
+#include "../header/add_routine_json.h"
 
 static void activate(GtkApplication* app, gpointer user_data) {
     GtkWidget *window = gtk_application_window_new(app);
@@ -16,9 +15,10 @@ static void activate(GtkApplication* app, gpointer user_data) {
     GtkWidget *button_add = gtk_button_new_with_label("Ajouter une action");
     GtkWidget *button_stats = gtk_button_new_with_label("Statistique");
     GtkWidget *button_user_profile = gtk_button_new_with_label("Profile");
-    GtkWidget *routine_research = gtk_search_entry_new();
+    GtkWidget *iterations_spin = gtk_spin_button_new_with_range(0, 1000, 1);
     GtkWidget *button_back = gtk_button_new_with_label("Retour à la page principale");
     GtkWidget *delete_entry = gtk_entry_new();
+    GtkWidget *iteration_title = gtk_label_new("Nombre d'itération :");
     GtkWidget *old_name = gtk_entry_new();
     GtkWidget *new_name = gtk_entry_new();
     GtkWidget *delete = gtk_button_new_with_label("Supprimer");
@@ -40,7 +40,8 @@ static void activate(GtkApplication* app, gpointer user_data) {
     gtk_fixed_put(GTK_FIXED(fixed_main), button_stats, 0, 0);
     gtk_fixed_put(GTK_FIXED(fixed_main), rename_button, 0, 100);  
     gtk_fixed_put(GTK_FIXED(fixed_main), button_user_profile, 0, 50);
-    gtk_fixed_put(GTK_FIXED(fixed_main), routine_research, 200, 0);
+    gtk_fixed_put(GTK_FIXED(fixed_main), iterations_spin, 350, 0);
+    gtk_fixed_put(GTK_FIXED(fixed_main), iteration_title, 200, 0);
     gtk_fixed_put(GTK_FIXED(fixed_main), delete_entry, 200, 50);
     gtk_fixed_put(GTK_FIXED(fixed_main), delete, 650, 50);
     gtk_fixed_put(GTK_FIXED(fixed_main), old_name, 200, 100);
@@ -49,12 +50,13 @@ static void activate(GtkApplication* app, gpointer user_data) {
     // Définir une taille spécifique pour chaque bouton
     gtk_widget_set_size_request(button_add, 200, 50);
     gtk_widget_set_size_request(rename_button, 200, 50);
+    gtk_widget_set_size_request(iteration_title, 100, 50);
     gtk_widget_set_size_request(reload, 200, 50); 
     gtk_widget_set_size_request(button_stats, 200, 50);
     gtk_widget_set_size_request(button_back, 200, 50);
     gtk_widget_set_size_request(button_user_profile, 200, 50);
     gtk_widget_set_size_request(delete, 200, 50);
-    gtk_widget_set_size_request(routine_research, 450, 50);
+    gtk_widget_set_size_request(iterations_spin, 300, 50);
     gtk_widget_set_size_request(delete_entry, 450, 50);
     gtk_widget_set_size_request(old_name, 225, 50);
     gtk_widget_set_size_request(new_name, 225, 50);
@@ -82,8 +84,11 @@ static void activate(GtkApplication* app, gpointer user_data) {
     g_signal_connect(delete, "clicked", G_CALLBACK(delete_routine), delete_entry);
     g_signal_connect(reload, "clicked", G_CALLBACK(reload_routines), flow_box);
     g_signal_connect(rename_button, "clicked", G_CALLBACK(rename_gtk), old_name);
-    g_object_set_data(G_OBJECT(rename_button), "new_name_entry", new_name);
 
+    g_signal_connect(iterations_spin, "value-changed", G_CALLBACK(on_spin_button_value_changed), GINT_TO_POINTER(1));
+
+    set_iterations_from_json(iterations_spin, "routine.json", 1);
+    
     // Charge les routines enregistrer
     load_routines_from_json(GTK_FLOW_BOX(flow_box), "action.json");
 

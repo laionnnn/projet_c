@@ -1,11 +1,11 @@
-{"routines":[
+{
+  "routines":[
     {
-        "id":1,
-        "name":"Routine 1",
-        "creationDate":"1-1-2025",
-        "EndDate":"20-1-2025",
-        "iteration":6
-      }
-
-    ]
+      "id":1,
+      "name":"Routine 1",
+      "creationDate":"1-1-2025",
+      "EndDate":"20-1-2025",
+      "iteration":9
+    }
+  ]
 }
