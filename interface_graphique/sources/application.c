@@ -1,12 +1,14 @@
 #include <gtk/gtk.h>
 #include <json-c/json.h>
-#include "../header/generate_button.h"
+#include "../header/add_action.h"
 #include "../header/profile.h"
-#include "../header/load_routine.h"
+#include "../header/load.h"
 #include "../header/delete.h"
 #include "../header/rename.h"
 #include "../header/interface_stat.h"
-#include "../header/add_routine_json.h"
+#include "../header/add_to_json.h"
+#include "../header/spin_button.h"
+
 
 static void activate(GtkApplication* app, gpointer user_data) {
     GtkWidget *window = gtk_application_window_new(app);
@@ -79,18 +81,28 @@ static void activate(GtkApplication* app, gpointer user_data) {
 
     // Connecter les signaux pour les clics sur les boutons
     g_signal_connect(button_stats, "clicked", G_CALLBACK(interface_stat), NULL);
-    g_signal_connect(button_add, "clicked", G_CALLBACK(on_generate_button_clicked), flow_box);
+
+    g_signal_connect(button_add, "clicked", G_CALLBACK(add_action), flow_box);
+
     g_signal_connect(button_user_profile, "clicked", G_CALLBACK(user_profile_window), "user1.json");
+
+    
     g_signal_connect(delete, "clicked", G_CALLBACK(delete_routine), delete_entry);
+
     g_signal_connect(reload, "clicked", G_CALLBACK(reload_routines), flow_box);
+
+    
+    g_object_set_data(G_OBJECT(rename_button), "new_name_entry", new_name);
     g_signal_connect(rename_button, "clicked", G_CALLBACK(rename_gtk), old_name);
 
-    g_signal_connect(iterations_spin, "value-changed", G_CALLBACK(on_spin_button_value_changed), GINT_TO_POINTER(1));
+    
 
     set_iterations_from_json(iterations_spin, "routine.json", 1);
+
+    g_signal_connect(iterations_spin, "value-changed", G_CALLBACK(update_json_iteration), GINT_TO_POINTER(1));
     
     // Charge les routines enregistrer
-    load_routines_from_json(GTK_FLOW_BOX(flow_box), "action.json");
+    load_from_json(GTK_FLOW_BOX(flow_box), "action.json");
 
     // Détail de la fenêtre principale
     gtk_window_set_title(GTK_WINDOW(window), "Page Principale");

@@ -2,17 +2,10 @@
 #include <json-c/json.h>
 #include <stdio.h>
 #include <string.h>
+#include "../header/structure.h"
 
-// Structure pour stocker les champs des actions et les informations du fichier JSON
-typedef struct {
-    GtkWidget *description_entry;
-    GtkWidget *constraints_entry;
-    GtkWidget *iterations_spin; // Utilisation d'un GtkSpinButton
-    const char *json_file;
-    int action_id; // Identifiant de l'action
-} ActionData;
 
-// Fonction pour sauvegarder les modifications des données de l'action
+// Fonction pour sauvegarder les modifications des données
 void save_action_data(GtkWidget *widget, gpointer user_data) {
     ActionData *data = (ActionData *)user_data;
 
@@ -81,7 +74,7 @@ void action_window(GtkWidget *widget, gpointer user_data) {
 
     char buffer[4096];
     size_t read_size = fread(buffer, 1, sizeof(buffer) - 1, file);
-    buffer[read_size] = '\0'; // Terminer la chaîne
+    buffer[read_size] = '\0';
     fclose(file);
 
     struct json_object *parsed_json = json_tokener_parse(buffer);

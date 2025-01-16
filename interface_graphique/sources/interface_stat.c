@@ -5,19 +5,7 @@
 #include <json-c/json.h>
 #include <time.h>
 
-//variable de test
-
-
-
-
-
-
-
-
-//fin variable test
-
-void
-interface_stat(GtkWidget *widget, gpointer user_data) {
+void interface_stat(GtkWidget *widget, gpointer user_data) {
 
     //----------recuperation date----------
 
@@ -307,4 +295,4 @@ interface_stat(GtkWidget *widget, gpointer user_data) {
     // Afficher la fenêtre
     gtk_widget_show(window);
 
-};
+}

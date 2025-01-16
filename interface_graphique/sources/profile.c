@@ -1,18 +1,9 @@
 #include <gtk/gtk.h>
-#include <json-c/json.h>  // Correction ici
-  // Inclusion de JSON-C
+#include <json-c/json.h>
+#include "../header/structure.h"
 
-// Structure pour stocker les entrées utilisateur
-typedef struct {
-    GtkWidget *name_entry;
-    GtkWidget *familyname_entry;
-    GtkWidget *age_entry;
-    GtkWidget *sexe_entry;
-    GtkWidget *status_entry;
-    const char *json_file;
-} UserProfileData;
 
-// Fonction pour mettre à jour le fichier JSON avec les données utilisateur
+// Fonction pour mettre à jour le fichier JSON
 void update_user_profile(GtkWidget *widget, gpointer data) {
     UserProfileData *profile_data = (UserProfileData *)data;
 
@@ -32,7 +23,7 @@ void update_user_profile(GtkWidget *widget, gpointer data) {
 
     char buffer[4096];
     size_t read_size = fread(buffer, 1, sizeof(buffer) - 1, file);
-    buffer[read_size] = '\0'; // Terminer la chaîne
+    buffer[read_size] = '\0';
     fclose(file);
 
     // Parser le contenu JSON
@@ -42,7 +33,7 @@ void update_user_profile(GtkWidget *widget, gpointer data) {
         return;
     }
 
-    // Accéder à la section `user_profile`
+    
     struct json_object *user_profile_array;
     if (json_object_object_get_ex(parsed_json, "user_profile", &user_profile_array)) {
         struct json_object *user_profile = json_object_array_get_idx(user_profile_array, 0);
@@ -72,12 +63,10 @@ void update_user_profile(GtkWidget *widget, gpointer data) {
     g_print("Les modifications ont été enregistrées dans %s.\n", profile_data->json_file);
 }
 
-// Fonction pour créer une fenêtre GTK 4
-
+// Crée une page GTK
 void user_profile_window(const char *data, gpointer user_data) {
     const char *json_file = user_data;
 
-    // Allouer la structure pour stocker les données utilisateur
     UserProfileData *profile_data = g_malloc(sizeof(UserProfileData));
     profile_data->json_file = json_file;
 
@@ -90,7 +79,7 @@ void user_profile_window(const char *data, gpointer user_data) {
 
     char buffer[4096];
     size_t read_size = fread(buffer, 1, sizeof(buffer) - 1, file);
-    buffer[read_size] = '\0'; // Terminer la chaîne
+    buffer[read_size] = '\0';
     fclose(file);
 
     struct json_object *parsed_json = json_tokener_parse(buffer);
@@ -121,6 +110,7 @@ void user_profile_window(const char *data, gpointer user_data) {
         }
     }
 
+    // Crée les boutons/entrées
     GtkWidget *window = gtk_window_new();
     gtk_window_set_title(GTK_WINDOW(window), "Modifier le Profile");
     gtk_window_set_default_size(GTK_WINDOW(window), 210, 205);
