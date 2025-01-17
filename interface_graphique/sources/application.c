@@ -73,11 +73,11 @@ static void activate(GtkApplication* app, gpointer user_data) {
     gtk_flow_box_append(GTK_FLOW_BOX(flow_box), titleFLOWBOX);
 
     GtkWidget *scrolled_window_with_box = gtk_scrolled_window_new();
-    gtk_widget_set_size_request(scrolled_window_with_box, 200, 450);
+    gtk_widget_set_size_request(scrolled_window_with_box, 550, 450);
     gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(scrolled_window_with_box), flow_box);
 
     // Positionner la boîte à l'intérieur du conteneur fixed
-    gtk_fixed_put(GTK_FIXED(fixed_main), scrolled_window_with_box, 325, 200);
+    gtk_fixed_put(GTK_FIXED(fixed_main), scrolled_window_with_box, 150, 200);
 
     // Connecter les signaux pour les clics sur les boutons
     g_signal_connect(button_stats, "clicked", G_CALLBACK(interface_stat), NULL);

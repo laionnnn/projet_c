@@ -1,25 +1,32 @@
 {
   "actions":[
     {
-      "id":1,
+      "id":0,
       "name":"bench",
       "description":"leg",
       "constraints":"10fois",
       "iteration_compleat":14
     },
     {
-      "id":2,
+      "id":1,
       "name":"press",
       "description":"leg",
       "constraints":"10fois",
       "iteration_compleat":10
     },
     {
-      "id":3,
+      "id":2,
       "name":"curl",
       "description":"ed",
       "constraints":"10fois",
       "iteration_compleat":6
+    },
+    {
+      "id":3,
+      "name":"squat",
+      "description":"squat barre",
+      "constraints":"10kg x 10",
+      "iteration_compleat":1
     }
   ]
 }

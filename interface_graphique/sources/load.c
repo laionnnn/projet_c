@@ -34,6 +34,7 @@ void load_from_json(GtkFlowBox *flow_box, const char *filename) {
 
             // Créer un bouton
             GtkWidget *button = gtk_button_new_with_label(name);
+            gtk_widget_set_size_request(button, 500, 50); 
 
             // Connecter le bouton à la fonction d'ouvrir une fênetre
             g_signal_connect(button, "clicked", G_CALLBACK(action_window), GINT_TO_POINTER(i));
