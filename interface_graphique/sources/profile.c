@@ -120,27 +120,27 @@ void user_profile_window(const char *data, gpointer user_data) {
     gtk_window_set_child(GTK_WINDOW(window), grid);
 
     profile_data->name_entry = gtk_entry_new();
-    gtk_entry_set_placeholder_text(GTK_ENTRY(profile_data->name_entry), n);
+    gtk_editable_set_text(GTK_EDITABLE(profile_data->name_entry), n);
     gtk_grid_attach(GTK_GRID(grid), gtk_label_new("Prénom:"), 0, 0, 1, 1);
     gtk_grid_attach(GTK_GRID(grid), profile_data->name_entry, 1, 0, 1, 1);
 
     profile_data->familyname_entry = gtk_entry_new();
-    gtk_entry_set_placeholder_text(GTK_ENTRY(profile_data->familyname_entry), family_n);
+    gtk_editable_set_text(GTK_EDITABLE(profile_data->familyname_entry), family_n);
     gtk_grid_attach(GTK_GRID(grid), gtk_label_new("Nom:"), 0, 1, 1, 1);
     gtk_grid_attach(GTK_GRID(grid), profile_data->familyname_entry, 1, 1, 1, 1);
 
     profile_data->age_entry = gtk_entry_new();
-    gtk_entry_set_placeholder_text(GTK_ENTRY(profile_data->age_entry), ages);
+    gtk_editable_set_text(GTK_EDITABLE(profile_data->age_entry), ages);
     gtk_grid_attach(GTK_GRID(grid), gtk_label_new("Age:"), 0, 2, 1, 1);
     gtk_grid_attach(GTK_GRID(grid), profile_data->age_entry, 1, 2, 1, 1);
 
     profile_data->sexe_entry = gtk_entry_new();
-    gtk_entry_set_placeholder_text(GTK_ENTRY(profile_data->sexe_entry), sexeMF);
+    gtk_editable_set_text(GTK_EDITABLE(profile_data->sexe_entry), sexeMF);
     gtk_grid_attach(GTK_GRID(grid), gtk_label_new("Sexe:"), 0, 3, 1, 1);
     gtk_grid_attach(GTK_GRID(grid), profile_data->sexe_entry, 1, 3, 1, 1);
 
     profile_data->status_entry = gtk_entry_new();
-    gtk_entry_set_placeholder_text(GTK_ENTRY(profile_data->status_entry), statuss);
+    gtk_editable_set_text(GTK_EDITABLE(profile_data->status_entry), statuss);
     gtk_grid_attach(GTK_GRID(grid), gtk_label_new("Status:"), 0, 4, 1, 1);
     gtk_grid_attach(GTK_GRID(grid), profile_data->status_entry, 1, 4, 1, 1);
 
