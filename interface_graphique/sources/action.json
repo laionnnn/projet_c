@@ -27,6 +27,34 @@
       "description":"squat barre",
       "constraints":"10kg x 10",
       "iteration_compleat":1
+    },
+    {
+      "id":4,
+      "name":"hammer",
+      "description":"",
+      "constraints":"",
+      "iteration_compleat":0
+    },
+    {
+      "id":5,
+      "name":"Action 1",
+      "description":"",
+      "constraints":"",
+      "iteration_compleat":0
+    },
+    {
+      "id":6,
+      "name":"Action 2",
+      "description":"",
+      "constraints":"",
+      "iteration_compleat":0
+    },
+    {
+      "id":7,
+      "name":"Action 3",
+      "description":"",
+      "constraints":"",
+      "iteration_compleat":0
     }
   ]
 }

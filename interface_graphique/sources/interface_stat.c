@@ -88,7 +88,7 @@ void interface_stat(GtkWidget *widget, gpointer user_data) {
         
         actions = json_object_array_get_idx(action_array, i);        
         nom[i] = json_object_get_string(json_object_object_get(actions, "name"));
-        iteration_compleate_action[i] = (float)json_object_get_int(json_object_object_get(actions, "id"));
+        iteration_compleate_action[i] = (float)json_object_get_int(json_object_object_get(actions, "iteration_compleat"));
 
     }
 
