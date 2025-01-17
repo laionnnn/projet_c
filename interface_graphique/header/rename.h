@@ -5,7 +5,7 @@
 #include <json-c/json.h>
 
 
-void rename_routine(const char *filename, const char *old_name, const char *new_name);
+void rename_json(const char *filename, const char *old_name, const char *new_name);
 
 void rename_gtk(GtkButton *button, gpointer user_data);
 

@@ -6,6 +6,7 @@
         "generate_action.h": "c",
         "profile.h": "c",
         "load_routine.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "add_to_json.h": "c"
     }
 }
